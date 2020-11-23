@@ -1,27 +1,30 @@
-# ParseServerAngular
+# Express App + Angular 7 + Parse Server App with Back4App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
+In this repository you will find an example app working with Back4App + Javascript SDK.
 
-## Development server
+### Step 1 - Back4App
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+If it is your first time with Back4App, [create a account](https://www.back4app.com/docs/platform/get-started/new-parse-app).
 
-## Code scaffolding
+#### Step 1.1 - Replace Keys
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Don't forget to paste your Back4App App ID and Javascript Key in the `./backend/app.js` file.
 
-## Build
+#### Step 1.2 - Import template class
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Go to Back4App Dashboard and import the `./Cars.json` file following the guide below:
 
-## Running unit tests
+[Back4App Import class](https://help.back4app.com/hc/en-us/articles/115003438951-How-can-I-import-to-my-Database-)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Step 2 - Starting the Express server
 
-## Running end-to-end tests
+1. Access the `backend/` folder;
+2. Install the modules with `$npm i`;
+3. The, you can run the command: `$ nodemon app.js`.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+### Step 3 - Starting the Angular App
 
-## Further help
+1. Access the `my-back4app-app/` folder;
+2. Then, you can run the command: `$ng serve --open`.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Ready! You can test your application now :)

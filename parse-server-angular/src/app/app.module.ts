@@ -9,6 +9,12 @@ import { Dashboard2Component } from './dashboard2/dashboard2/dashboard2.componen
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar/navbar.component';
 
+import { Parse } from "parse";
+import { environment } from '../environments/environment';
+Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY);
+Parse.serverURL = environment.serverURL;
+
+
 @NgModule({
   declarations: [
     AppComponent,

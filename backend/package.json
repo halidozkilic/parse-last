@@ -1,0 +1,22 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Natália Condê <natalia.csouza98@outlook.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4",
+    "parse": "^2.1.0",
+    "cookie-parser": "^1.4.4",
+    "cors": "^2.8.5",
+    "debug": "^4.1.1",
+    "http-errors": "^1.7.3",
+    "mongoose": "^5.6.12",
+    "morgan": "^1.9.1"
+  }
+}
