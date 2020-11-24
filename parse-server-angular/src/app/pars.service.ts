@@ -19,4 +19,51 @@ export class ParsService {
     });
 
   }
+
+  getCases(){
+    return this.http.get(this.url +'/cases',{
+      observe:'body',
+      withCredentials:true,
+      headers:new HttpHeaders().append('Content-Type','application/json')
+    });
+
+  }
+
+  createCase(body:any){
+    return this.http.post(this.url + '/cases',body, {
+      observe:'body',
+      headers:new HttpHeaders().append('Content-Type','application/json')
+    });
+  }
+
+  
+
+  updateCase(body:any,id:any){
+    return this.http.put(this.url +'/cases/'+ id,body, {
+      observe:'body',
+      withCredentials:true,
+      headers:new HttpHeaders().append('Content-Type','application/json')
+    });
+
+  }
+
+  deleteCase(id:any){
+    return this.http.delete(this.url+ '/cases/'+ id  , {
+      observe:'body',
+      withCredentials:true,  
+      headers:new HttpHeaders().append('Content-Type','application/json')})
+    .subscribe(response => console.log(response));
+  }
+
+  getUserById(id:any){
+    return this.http.get(this.url +'/user'+id,{
+      observe:'body',
+      withCredentials:true,
+      headers:new HttpHeaders().append('Content-Type','application/json')
+    });
+  }
+    
+  
+
+
 }

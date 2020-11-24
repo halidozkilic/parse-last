@@ -3,6 +3,10 @@ import { NgModule } from '@angular/core';
 
 import {DemoMaterialModule} from './material.module';
 
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+
 import { MatSliderModule } from '@angular/material/slider';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,7 +34,9 @@ Parse.serverURL = environment.serverURL;
     BrowserAnimationsModule,
     MatSliderModule,
     DemoMaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
