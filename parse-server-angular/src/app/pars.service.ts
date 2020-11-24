@@ -30,11 +30,12 @@ export class ParsService {
   }
 
   createCase(body:any){
+    console.log(body);
     return this.http.post(this.url + '/cases',body, {
       observe:'body',
       withCredentials:true,  
-      headers:new HttpHeaders().append('Content-Type','application/json')
-    });
+      headers:new HttpHeaders().append('Content-Type','application/json')})
+    .subscribe(response => console.log(response));
   }
 
   

@@ -86,6 +86,7 @@ app.post("/cases", (req, res) => { //create case
   const Case = Parse.Object.extend("case");
   const User = Parse.Object.extend("User");
   const myNewObject = new Case();
+  console.log(req.body.caseType);
   const cas1 = req.body.caseType;
   myNewObject.set("caseType", cas1);
   myNewObject.set(
