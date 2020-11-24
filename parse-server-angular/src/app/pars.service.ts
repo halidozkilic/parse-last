@@ -39,6 +39,7 @@ export class ParsService {
   }
 
   
+//sweq
 
   updateCase(body:any,id:any){
     console.log(id);
