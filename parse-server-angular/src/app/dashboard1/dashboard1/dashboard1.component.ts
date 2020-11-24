@@ -5,20 +5,13 @@ import {MatTableDataSource} from '@angular/material/table';
 import { ParsService } from '../../pars.service';
 
 export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  color: string;
+  objectId: string;
+  username: string;
+  emailVerified: boolean;
+  createdAt: Date;
+  updatedAt:Date;
 }
 
-const COLORS: string[] = [
-  'maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple', 'fuchsia', 'lime', 'teal',
-  'aqua', 'blue', 'navy', 'black', 'gray'
-];
-const NAMES: string[] = [
-  'Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack', 'Charlotte', 'Theodore', 'Isla', 'Oliver',
-  'Isabella', 'Jasper', 'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'
-];
 
 
 
@@ -29,28 +22,32 @@ const NAMES: string[] = [
 })
 export class Dashboard1Component implements AfterViewInit  {
 
-  displayedColumns: string[] = ['id', 'name', 'progress', 'color'];
+  displayedColumns: string[] = ['objectId', 'username', 'emailVerified', 'createdAt','updatedAt'];
   dataSource: MatTableDataSource<UserData>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private userService:ParsService) {
-    // Create 100 users
-    let datas;
-    const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
+    
+    var datas;
+    
+    //FİLTER ÇALISIYOR AMA NEDENSE SIRALAMA VE İTEM SAYISI EVENTLERİ CALISMIYOR muhtmelen Id lerin 1 den baslamaması ile alakası var.
 
     this.userService.getUsers().subscribe(
       user=>{
-        console.log(user); 
-        datas=user;
         
+        datas=user;
+       console.log(datas)
+       this.dataSource = new MatTableDataSource(datas);
       },
       error=>console.log("cöp")
      );
-
+     
     // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
+    //console.log(datas);
+    this.dataSource =this.dataSource;
+   
   }
 
   ngAfterViewInit() {
@@ -66,17 +63,4 @@ export class Dashboard1Component implements AfterViewInit  {
       this.dataSource.paginator.firstPage();
     }
   }
-}
-
-/** Builds and returns a new User. */
-function createNewUser(id: number): UserData {
-  const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-      NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
-
-  return {
-    id: id.toString(),
-    name: name,
-    progress: Math.round(Math.random() * 100).toString(),
-    color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
-  };
 }

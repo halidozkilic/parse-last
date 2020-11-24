@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ParsService } from '../../pars.service';
 @Component({
   selector: 'app-dashboard2',
   templateUrl: './dashboard2.component.html',
@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Dashboard2Component implements OnInit {
 
-  constructor() { }
+  constructor(private userService:ParsService) { }
 
   ngOnInit(): void {
   }
