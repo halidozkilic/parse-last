@@ -1,4 +1,4 @@
-# Express App + Angular 7 + Parse Server App with Back4App
+# Express App + Angular 10 + Parse Server App with Back4App
 
 In this repository you will find an example app working with Back4App + Javascript SDK.
 
