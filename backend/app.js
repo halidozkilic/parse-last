@@ -86,20 +86,20 @@ app.post("/cases", (req, res) => { //create case
   const Case = Parse.Object.extend("case");
   const User = Parse.Object.extend("User");
   const myNewObject = new Case();
-  const cas1 = req.body.case;
+  const cas1 = req.body.caseType;
   myNewObject.set("caseType", cas1);
   myNewObject.set(
     "file",
-    new Parse.File("resume.txt", { base64: req.body.base64 })
+    new Parse.File("resume.txt", { base64: req.body.file })
   );
   myNewObject.set("belongTo", {
     __type: "Pointer",
     _objCount: 0,
     className: "_User",
-    objectId: req.body._id,
+    objectId: req.body.belongTo.objectId,
   });
-  console.log(req.body._id);
-  myNewObject.set("order", Number(req.body.number));
+  
+  myNewObject.set("order", Number(req.body.order));
 
   myNewObject.save().then(
     (result) => {
@@ -121,20 +121,21 @@ app.put("/cases/:id", (req, res) => { //update  case
   const Case = Parse.Object.extend("case");
   const query = new Parse.Query(Case);
   // here you put the objectId that you want to update
-  const cas1 = req.body.case;
+  console.log(req.body.file);
+  const cas1 = req.body.caseType;
   query.get(req.params.id).then((object) => {
     object.set("caseType", cas1);
     object.set(
       "file",
-      new Parse.File("resume.txt", { base64: req.body.base64 })
+      new Parse.File("resume.txt", { base64: req.body.file })
     );
     object.set("belongTo", {
       __type: "Pointer",
       _objCount: 0,
       className: "_User",
-      objectId: req.body._id,
+      objectId: req.body.belongTo.objectId,
     });
-    object.set("order", Number(req.body.number));
+    object.set("order", Number(req.body.order));
     object.save().then(
       (response) => {
         // You can use the "get" method to get the value of an attribute
@@ -160,8 +161,8 @@ app.delete("/cases/:id", (req, res) => { //delete  case
    
 query.get(req.params.id).then((object) => {
     object.destroy().then((response) => {
-      if (typeof document !== 'undefined') document.write(`Deleted case: ${JSON.stringify(response)}`);
-      res.send("deleted")
+     
+      res.json("deleted")
       console.log('Deleted case', response);
     }, (error) => {
       if (typeof document !== 'undefined') document.write(`Error while deleting case: ${JSON.stringify(error)}`);

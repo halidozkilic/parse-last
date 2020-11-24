@@ -1,68 +1,133 @@
-<div class="container m-5" >
-    <div class="row">
-        <div class="col-md-6" >
-
-                <div class="bg-info text-white p-2"  *ngIf="selectedProduct">
-                        selected Product: {{selectedProduct.name || '(None)'}}
-                    </div>
-                
-                
-                    <table class="table table-sm table-bordered">
-                        <tr>
-                            <th>Id</th>
-                            <th>caseType</th>
-                            <th>order</th>
-                            <th>belongTo</th>
-                            <th style="width: 155px"></th>
-                        </tr>
-                        <tr *ngFor="let product of products" 
-                        [class.halo]="getSelected(product)"> <!-- eğerki seçili olay true ise o zaman gerçekleştirir. -->
-                            <td>{{product.id}}</td>
-                            <td><img src={{product.imageUrl}} width="80px" height="120px"></td>
-                            <td>{{product.name}}</td>
-                            <td>{{product.price}} tL</td>
-                            <td>
-                                <button class="btn btn-danger btn-xs" (click)="deleteProduct(product)" >Delete</button>
-                                <button (click)="editProduct(product)"  class="btn btn-success btn-xs">Edit </button>     
-                            </td>
-                        </tr>   
-                
-                
-                
-                    </table>
-
-        </div>
-
-        <div class="col-md-6"  *ngIf="selectedProduct">
-
-            <div class="form-group">
-                <label>Product Name</label>
-                <input   [(ngModel)]="selectedProduct.name"     type="text" class="form-control" >
-                <!-- <input type="text" class="form-control"  (input)="selectedProduct=$event.target.value"> other way -->
-            </div>            
-
-            <div class="form-group">
-                    <label>Product Price</label>
-                    <input  [(ngModel)]="selectedProduct.price" type="text" class="form-control">
-                    <!-- <input type="text" class="form-control"  (input)="selectedProduct=$event.target.value"> other way -->
-            </div>            
-
-
-           <div class="form-group">
-                    <label>Product Image</label>
-                    <input  [(ngModel)]="selectedProduct.imageUrl" type="text" class="form-control" >
-                    <!-- <input type="text" class="form-control"  (input)="selectedProduct=$event.target.value"> other way -->
-            </div>            
-
-
-
-             <div class="form-group">
-                        <label>Product Description</label>                                              
-                        <input [(ngModel)]="selectedProduct.escription" type="text" class="form-control">
-                   <!-- <input type="text" class="form-control"  (input)="selectedProduct=$event.target.value"> other way -->
-            </div> 
-            
-            <button class="btn btn-info" (click)="saveChanges()  ">SAVE</button>
-        </div>
+<div class="container m-5">
+  <div class="row" style="width: 120%">
+    <div class="col-md-7">
+      <table class="table table-sm table-bordered">
+        <tr>
+          <th>Id</th>
+          <th>caseType</th>
+          <th>order</th>
+          <th>belongTo</th>
+          <th>file</th>
+          <th style="width: 600px"></th>
+          <th style="width: 600px"></th>
+          <th style="width: 600px"></th>
+          <th style="width: 600px"></th>
+        </tr>
+        <tr *ngFor="let case of cases" [class.halo]="">
+          <!-- eğerki seçili olay true ise o zaman gerçekleştirir. -->
+          <td>{{ case.objectId }}</td>
+          <td>{{ case.caseType }}</td>
+          <td>{{ case.order }}</td>
+          <td>{{ case.belongTo.objectId }}</td>
+          <td>{{ case.file }}</td>
+          <td>
+            <button
+              class="btn btn-danger btn-xs"
+              (click)="deleteCase(case.objectId)"
+            >
+              Delete
+            </button>
+          </td>
+          <td>
+            <button (click)="editCase(case)" class="btn btn-success btn-xs">
+              Edit
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn btn-info btn-xs"
+              (click)="detail(case.belongTo.objectId)"
+            >
+              details
+            </button>
+          </td>
+          
+        </tr>
+        
+      </table>
     </div>
+    <div class="col-md-4" *ngIf="selectedCase" style="float: right">
+      <div class="form-group">
+        <label>caseType</label>
+        <input
+          [(ngModel)]="selectedCase.caseType"
+          type="text"
+          class="form-control"
+        />
+        <!-- <input type="text" class="form-control"  (input)="selectedProduct=$event.target.value"> other way -->
+      </div>
+
+      <div class="form-group">
+        <label>case order</label>
+        <input
+          [(ngModel)]="selectedCase.order"
+          type="number"
+          class="form-control"
+        />
+        <!-- <input type="text" class="form-control"  (input)="selectedProduct=$event.target.value"> other way -->
+      </div>
+
+      <div class="form-group">
+        <label>belongTo</label>
+        <input
+          [(ngModel)]="selectedCase.belongTo.objectId"
+          type="text"
+          class="form-control"
+        />
+        <!-- <input type="text" class="form-control"  (input)="selectedProduct=$event.target.value"> other way -->
+      </div>
+
+      <div class="form-group">
+        <label>file</label>
+        <input
+          [(ngModel)]="selectedCase.file"
+          type="file"
+          class="form-control"
+        />
+        <!-- <input type="text" class="form-control"  (input)="selectedProduct=$event.target.value"> other way -->
+      </div>
+
+      <button class="btn btn-info" (click)="saveChanges(selectedCase)">
+        SAVE
+      </button>
+      <br>
+      <button class="btn btn-success" (click)="add(selectedCase)">
+        or add new One
+      </button>
+    </div>
+
+    <div class="col-md-5" *ngIf="show" style="float: right">
+      <div class="form-group">
+        <label>email</label>
+        <input
+          [(ngModel)]="parseUser.emailVerified"
+          type="text"
+          class="form-control"
+        />
+        <!-- <input type="text" class="form-control"  (input)="selectedProduct=$event.target.value"> other way -->
+      </div>
+
+      <div class="form-group">
+        <label>username</label>
+        <input
+          [(ngModel)]="parseUser.username"
+          type="text"
+          class="form-control"
+        />
+        <!-- <input type="text" class="form-control"  (input)="selectedProduct=$event.target.value"> other way -->
+      </div>
+
+      <div class="form-group">
+        <label>objectId</label>
+        <input
+          [(ngModel)]="parseUser.objectId"
+          type="text"
+          class="form-control"
+        />
+        <!-- <input type="text" class="form-control"  (input)="selectedProduct=$event.target.value"> other way -->
+      </div>
+
+     
+    </div>
+  </div>
 </div>

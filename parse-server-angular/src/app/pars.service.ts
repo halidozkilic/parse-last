@@ -32,6 +32,7 @@ export class ParsService {
   createCase(body:any){
     return this.http.post(this.url + '/cases',body, {
       observe:'body',
+      withCredentials:true,  
       headers:new HttpHeaders().append('Content-Type','application/json')
     });
   }
@@ -39,12 +40,13 @@ export class ParsService {
   
 
   updateCase(body:any,id:any){
+    console.log(id);
+    console.log(body);
     return this.http.put(this.url +'/cases/'+ id,body, {
       observe:'body',
-      withCredentials:true,
-      headers:new HttpHeaders().append('Content-Type','application/json')
-    });
-
+      withCredentials:true,  
+      headers:new HttpHeaders().append('Content-Type','application/json')})
+    .subscribe(response => console.log(response));
   }
 
   deleteCase(id:any){
@@ -56,7 +58,7 @@ export class ParsService {
   }
 
   getUserById(id:any){
-    return this.http.get(this.url +'/user'+id,{
+    return this.http.get(this.url +'/users/'+id,{
       observe:'body',
       withCredentials:true,
       headers:new HttpHeaders().append('Content-Type','application/json')

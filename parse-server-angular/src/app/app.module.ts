@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+
+
+
 import {DemoMaterialModule} from './material.module';
 
 
@@ -19,7 +22,7 @@ import { Parse } from "parse";
 import { environment } from '../environments/environment';
 Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY);
 Parse.serverURL = environment.serverURL;
-
+import { CommonModule } from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -36,7 +39,8 @@ Parse.serverURL = environment.serverURL;
     DemoMaterialModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
